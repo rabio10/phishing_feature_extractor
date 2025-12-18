@@ -24,7 +24,7 @@ and build a CSV dataset ready for machine learning model training.
 
 ## Requirements
 
-- Python 3.8+ (recommandé)  
+- Python 3.8+ (recommanded)  
 - `pip` (or use a virtual environment)  
 
 ---
@@ -100,7 +100,7 @@ The script produces:
 
 ========================================================
 ## Host Information Features
-File: extract_hostinfo_features.py
+### File: extract_hostinfo_features.py
 ========================================================
 
 This module extracts features related to the hosting infrastructure,
@@ -190,7 +190,7 @@ these indicators significantly improves the robustness of phishing detection mod
 
 ========================================================
 ## Content-Based Features
-File: extract_contentinfo_features.py
+### File: extract_contentinfo_features.py
 ========================================================
 
 This module extracts features related to the web page content, HTML structure,
@@ -303,7 +303,7 @@ URL-based and host-based analysis for accurate phishing detection.
 
 ========================================================
 ## General and URL-Level Features
-File: extract_general_features.py
+### File: extract_general_features.py
 ========================================================
 
 This module extracts general, lexical, and structural features from the
@@ -430,7 +430,7 @@ host-based analysis is performed.
 
 ========================================================
 ## Additional Comparative Features (Root Domain vs Subdomain)
-File: extract_additional_features.py
+### File: extract_additional_features.py
 ========================================================
 
 This module extracts comparative and differential features between the
