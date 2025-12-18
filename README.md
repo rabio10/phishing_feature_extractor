@@ -1,4 +1,103 @@
-# phishing_feature_extractor
+# Phishing Feature Extractor
+
+Python pipeline to extract phishing-related features (general, host-based,
+content-based and additional comparative features) from analysis JSON files
+and build a CSV dataset ready for machine learning model training.
+
+---
+
+## Repository Structure
+
+- `orchestrator.py` : main script that iterates over `benign` and `malicious`
+  directories, calls each feature extractor and builds the final DataFrame.
+- `extract_general_features.py` : extraction of URL-level, lexical and
+  HTTP/DNS status features.
+- `extract_hostinfo_features.py` : extraction of host-related features
+  (DNS, SSL, ASN, geolocation).
+- `extract_contentinfo_features.py` : extraction of content-related features
+  (HTML structure, screenshots, headers, network activity).
+- `extract_additional_features.py` : comparative analysis between `rd`
+  (root domain) and `sd` (subdomain), including Wayback history and hosting
+  inconsistencies.
+- `output/` : generated directory containing `phishing_dataset.csv`.
+---
+
+## Requirements
+
+- Python 3.8+ (recommandé)  
+- `pip` (or use a virtual environment)  
+
+---
+
+## Installation (recommended: virtualenv)
+
+### Windows (PowerShell)
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### Linux / macOS (bash)
+```bash
+python3 -m venv venv
+source venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+**Minimal `requirements.txt` example:**
+```
+pandas
+tqdm
+numpy
+```
+---
+
+## Configuration Before Execution
+
+Open `orchestrator.py` and update the global variables at the top of the file to point to the directories containing your phishing analysis JSON files:
+
+```python
+BENIGN_PATH = r"D:\Downloads\benign"       # path to benign JSON files
+MALICIOUS_PATH = r"D:\Downloads\malicious" # path to malicious JSON files
+```
+
+Make sure these directories exist and contain `.json` files.
+
+---
+
+## Expected JSON Format
+
+- Minified JSON files (single-line JSON) are fully supported by `json.load()`.  
+- Each file should be a valid JSON object and ideally contain the following top-level keys:
+
+```json
+{
+  "url": "...",
+  "host_info": {...},
+  "content_info": {...},
+  "additional": {...}
+}
+```
+- The pipeline includes defensive checks for missing or malformed fields, but heavily corrupted JSON files may still cause parsing errors.  
+
+---
+
+## Execution
+
+From the root of the project (with the virtual environment activated):
+
+```bash
+python orchestrator.py
+```
+
+The script produces:
+- `output/phishing_dataset.csv` — final CSV dataset containing all extracted features.
+- A preview of the generated DataFrame is printed to the console (configurable in `orchestrator.py`).  
+---
+
 ========================================================
 ## Host Information Features
 File: extract_hostinfo_features.py
@@ -440,3 +539,7 @@ subdomains. Phishing campaigns often operate on newly created subdomains
 with different hosting, SSL configuration, and no historical presence.
 These features help distinguish legitimate subdomains from malicious
 impersonations with high precision.
+
+
+
+
