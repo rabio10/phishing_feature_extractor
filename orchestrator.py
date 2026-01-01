@@ -1,5 +1,4 @@
 """
-orchestrator.py — robuste, tolérant aux erreurs
 Author: Chayma Sadiki (adapté)
 """
 
@@ -9,19 +8,10 @@ import pandas as pd
 import traceback
 from tqdm import tqdm
 
-# --------------------------------------------------
-# Global paths (use forward slashes under Windows)
-# --------------------------------------------------
+# Global paths
 BENIGN_PATH = "D:/Downloads/benign"
 MALICIOUS_PATH = "D:/Downloads/malicious"
 
-# --------------------------------------------------
-# Import feature extractor modules (assumed to expose functions)
-# - extract_general_features(data: dict) -> dict
-# - extract_hostinfo_features(host_info: dict) -> dict
-# - extract_contentinfo_features(content_info: dict) -> dict
-# - extract_additional_features(additional: dict) -> dict
-# --------------------------------------------------
 from extract_general_features import extract_general_features
 from extract_hostinfo_features import extract_hostinfo_features
 from extract_contentinfo_features import extract_contentinfo_features
@@ -30,7 +20,7 @@ from extract_additional_features import extract_additional_features
 
 def safe_call(func, arg, fname, filename):
     """
-    Call func(arg) safely: if it raises, return {} and print a helpful trace.
+    Call func(arg) safely: if it raises, return {} and print a trace.
     fname = name of the extractor for logging.
     filename = current JSON filename for context.
     """
@@ -40,7 +30,7 @@ def safe_call(func, arg, fname, filename):
             arg = {}
         result = func(arg)
         if not isinstance(result, dict):
-            # defensive: ensure we always return a dict
+            # ensure we always return a dict
             return {}
         return result
     except Exception as e:
@@ -50,7 +40,6 @@ def safe_call(func, arg, fname, filename):
 
 
 def load_json_file(file_path, filename):
-    """Robust JSON loader returning dict or None (and prints errors)."""
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read().strip()
@@ -93,19 +82,20 @@ def build_global_dataframe() -> pd.DataFrame:
                 print(f"Skipped invalid JSON structure in: {filename}")
                 continue
 
-            # Collect features safely: one extractor failure won't drop the whole file
             row = {}
 
-            # general features (pass entire top-level JSON)
+            # general features 
             row.update(safe_call(extract_general_features, data, "extract_general_features", filename))
 
-            # host_info, content_info, additional may be nested or absent; pass {} if missing
+            # main sections from JSON
             host_info = data.get("host_info") or {}
             content_info = data.get("content_info") or {}
             additional = data.get("additional") or {}
+            # special data
+            url = data.get("url", "")
 
             row.update(safe_call(extract_hostinfo_features, host_info, "extract_hostinfo_features", filename))
-            row.update(safe_call(extract_contentinfo_features, content_info, "extract_contentinfo_features", filename))
+            row.update(safe_call(extract_contentinfo_features, content_info, "extract_contentinfo_features", filename, url=url))
             row.update(safe_call(extract_additional_features, additional, "extract_additional_features", filename))
 
             # metadata

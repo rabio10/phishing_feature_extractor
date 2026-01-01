@@ -1,0 +1,301 @@
+{
+    "screenshot": "",
+    "destination": "https://xcbmut.hgfosb.shop/",
+    "title": "Attention Required! | Cloudflare",
+    "html": "<!DOCTYPE html>",
+    "responses": [
+      {
+        "file_type": "ASCII text, with very long lines (24050)",
+        "md5": "5e8c69a459a691b5d1b9be442332c87d",
+        "ssdeep": "192:VuR/6okgTQwq23gGM8lUR9YRGQ2BwoX6zp+1+nDT1FvxKSI7/UsV7MSE6XZ2dKzk:JwV+oUcoQJpdf1dxKSI7/Ue7ZX2qk",
+        "requestId": "1720171039.4101758"
+      },
+      {
+        "file_type": "PNG image data, 178 x 175, 8-bit colormap, non-interlaced",
+        "md5": "0d768cbc261841d3affc933b9ac3130e",
+        "ssdeep": "96:35QRRzQqgtYCWBzmuvuLf33Pf309TxeL+vD+7SrQ9o6Br2eJk:GRRsqgOBzvcnM9TxVk9JCeJk",
+        "requestId": "1720171039.4446528"
+      },
+      {
+        "file_type": "PNG image data, 960 x 53, 8-bit colormap, non-interlaced",
+        "md5": "226dcb8f6144bdaafdfbd8f2f354be64",
+        "ssdeep": "12:6v/7et+/37c7jvBjLg+UnhdeNdLI4dACGHJovQpMZP5ajgj7xbKwkRR/:Lu490+NdcCqJlpMZxajnwCR/",
+        "requestId": "1720171039.446731"
+      }
+    ],
+    "cookies": [],
+    "har": [
+      {
+        "request": {
+          "id": "1720171039.4019995",
+          "url": "https://xcbmut.hgfosb.shop/"
+        },
+        "response": {
+          "headers": [
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=15"
+            },
+            {
+              "key": "cf-ray",
+              "value": "89e642e41c1d6921-FRA"
+            },
+            {
+              "key": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "key": "content-type",
+              "value": "text/html; charset=UTF-8"
+            },
+            {
+              "key": "date",
+              "value": "Fri, 05 Jul 2024 09:17:19 GMT"
+            },
+            {
+              "key": "expires",
+              "value": "Fri, 05 Jul 2024 09:17:34 GMT"
+            },
+            {
+              "key": "nel",
+              "value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "report-to",
+              "value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=UwmUytDm4sHF4FzPiF2CAO67wAH6H2OaXyKeuck6%2BFdY%2FWhcqia4hUc2lOB9jALfAQ6ZuHwVKQB6dbiw3E2L4nn6ib%2By06qOTLwn81BDQoaWS%2F55YLAeSq7q6MzGNcHKVvZAieuQMIXj66w7l3YRL%2BM%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            }
+          ],
+          "id": "1720171039.4019995",
+          "remoteIp": "[2606:4700:3030::6815:5816]",
+          "remotePort": 443,
+          "status": 403,
+          "statusText": "",
+          "url": "https://xcbmut.hgfosb.shop/"
+        }
+      },
+      {
+        "request": {
+          "id": "1720171039.4101758",
+          "url": "https://xcbmut.hgfosb.shop/cdn-cgi/styles/cf.errors.css"
+        },
+        "response": {
+          "headers": [
+            {
+              "key": "cache-control",
+              "value": "max-age=7200, public"
+            },
+            {
+              "key": "cf-ray",
+              "value": "89e642e43c406921-FRA"
+            },
+            {
+              "key": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "key": "content-type",
+              "value": "text/css"
+            },
+            {
+              "key": "date",
+              "value": "Fri, 05 Jul 2024 09:17:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"667e9dab-5df3\""
+            },
+            {
+              "key": "expires",
+              "value": "Fri, 05 Jul 2024 11:17:19 GMT"
+            },
+            {
+              "key": "last-modified",
+              "value": "Fri, 28 Jun 2024 11:25:31 GMT"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "DENY"
+            }
+          ],
+          "id": "1720171039.4101758",
+          "remoteIp": "[2606:4700:3030::6815:5816]",
+          "remotePort": 443,
+          "status": 200,
+          "statusText": "",
+          "url": "https://xcbmut.hgfosb.shop/cdn-cgi/styles/cf.errors.css"
+        }
+      },
+      {
+        "request": {
+          "id": "1720171039.4446528",
+          "url": "https://xcbmut.hgfosb.shop/cdn-cgi/images/cf-no-screenshot-error.png"
+        },
+        "response": {
+          "headers": [
+            {
+              "key": "accept-ranges",
+              "value": "bytes"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=7200, public"
+            },
+            {
+              "key": "cf-ray",
+              "value": "89e642e45c5f6921-FRA"
+            },
+            {
+              "key": "content-length",
+              "value": "3213"
+            },
+            {
+              "key": "content-type",
+              "value": "image/png"
+            },
+            {
+              "key": "date",
+              "value": "Fri, 05 Jul 2024 09:17:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "\"667e9dab-c8d\""
+            },
+            {
+              "key": "expires",
+              "value": "Fri, 05 Jul 2024 11:17:19 GMT"
+            },
+            {
+              "key": "last-modified",
+              "value": "Fri, 28 Jun 2024 11:25:31 GMT"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "DENY"
+            }
+          ],
+          "id": "1720171039.4446528",
+          "remoteIp": "[2606:4700:3030::6815:5816]",
+          "remotePort": 443,
+          "status": 200,
+          "statusText": "",
+          "url": "https://xcbmut.hgfosb.shop/cdn-cgi/images/cf-no-screenshot-error.png"
+        }
+      },
+      {
+        "request": {
+          "id": "1720171039.446731",
+          "url": "https://xcbmut.hgfosb.shop/cdn-cgi/images/browser-bar.png?1376755637"
+        },
+        "response": {
+          "headers": [
+            {
+              "key": "accept-ranges",
+              "value": "bytes"
+            },
+            {
+              "key": "cache-control",
+              "value": "max-age=7200, public"
+            },
+            {
+              "key": "cf-ray",
+              "value": "89e642e45c5c6921-FRA"
+            },
+            {
+              "key": "content-length",
+              "value": "715"
+            },
+            {
+              "key": "content-type",
+              "value": "image/png"
+            },
+            {
+              "key": "date",
+              "value": "Fri, 05 Jul 2024 09:17:19 GMT"
+            },
+            {
+              "key": "etag",
+              "value": "\"667e9dab-2cb\""
+            },
+            {
+              "key": "expires",
+              "value": "Fri, 05 Jul 2024 11:17:19 GMT"
+            },
+            {
+              "key": "last-modified",
+              "value": "Fri, 28 Jun 2024 11:25:31 GMT"
+            },
+            {
+              "key": "server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "DENY"
+            }
+          ],
+          "id": "1720171039.446731",
+          "remoteIp": "[2606:4700:3030::6815:5816]",
+          "remotePort": 443,
+          "status": 200,
+          "statusText": "",
+          "url": "https://xcbmut.hgfosb.shop/cdn-cgi/images/browser-bar.png?1376755637"
+        }
+      }
+    ],
+    "extra_data": {},
+    "download": [],
+    "status_code": 403,
+    "error_msg": null
+  }

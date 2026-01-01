@@ -1,14 +1,3 @@
-"""
-extract_additional_features.py
---------------------------------
-Module to extract structured numerical features from the 'additional' section
-of phishing analysis JSON files.
-
-This section compares 'rd' (root domain) and 'sd' (subdomain) information,
-including DNS, SSL, content and historical wayback data.
-
-"""
-
 from typing import Dict, Any
 from datetime import datetime
 
@@ -17,23 +6,11 @@ def extract_additional_features(additional: Dict[str, Any]) -> Dict[str, Any]:
     """
     Extracts comparison and differential features between root domain (rd)
     and subdomain (sd) from the 'additional' section.
-
-    Parameters
-    ----------
-    additional : dict
-        The 'additional' dictionary extracted from the JSON.
-
-    Returns
-    -------
-    dict
-        Dictionary of numeric feature_name: value pairs.
     """
 
     features = {}
 
-    # -------------------------------
-    # Safely extract base sub-blocks
-    # -------------------------------
+    # extract base sub-blocks
     if not isinstance(additional, dict):
         return features
 
@@ -49,9 +26,7 @@ def extract_additional_features(additional: Dict[str, Any]) -> Dict[str, Any]:
     rd_host = rd.get("host_info") or {}
     sd_host = sd.get("host_info") or {}
 
-    # -------------------------------
     # Wayback (historical activity)
-    # -------------------------------
     def count_wayback_entries(wayback_years: Dict[str, Any]) -> int:
         """Count total captures across years (defensive)."""
         if not isinstance(wayback_years, dict):
@@ -86,22 +61,7 @@ def extract_additional_features(additional: Dict[str, Any]) -> Dict[str, Any]:
         (rd_last - rd_first).days if rd_first and rd_last else 0
     )
 
-    # -------------------------------
-    # SSL / HTTPS information
-    # -------------------------------
-    rd_ssl_valid = int(rd_host.get("ssl", {}).get("is_valid_cert", False))
-    sd_ssl_valid = int(sd_host.get("ssl", {}).get("is_valid_cert", False))
-    features["rd_ssl_valid"] = rd_ssl_valid
-    features["sd_ssl_valid"] = sd_ssl_valid
-    features["ssl_valid_diff"] = abs(rd_ssl_valid - sd_ssl_valid)
-
-    rd_https = int(rd_host.get("is_https", False))
-    sd_https = int(sd_host.get("is_https", False))
-    features["https_diff"] = abs(rd_https - sd_https)
-
-    # -------------------------------
-    # ASN and geolocation comparison
-    # -------------------------------
+    # ASN comparison
     rd_maxmind = rd_host.get("maxmind") or []
     sd_maxmind = sd_host.get("maxmind") or []
 
@@ -117,34 +77,29 @@ def extract_additional_features(additional: Dict[str, Any]) -> Dict[str, Any]:
     rd_asns = extract_asn_list(rd_maxmind)
     sd_asns = extract_asn_list(sd_maxmind)
 
-    features["rd_unique_asn_count"] = len(set(rd_asns))
-    features["sd_unique_asn_count"] = len(set(sd_asns))
     features["asn_overlap"] = int(bool(set(rd_asns) & set(sd_asns)))
 
-    # -------------------------------
-    # Content comparison (status, title, etc.)
-    # -------------------------------
+    # Content comparison (status, html, screenshot)
     rd_status = int(rd_content.get("status_code", 0) or 0)
     sd_status = int(sd_content.get("status_code", 0) or 0)
     features["rd_status_code"] = rd_status
     features["sd_status_code"] = sd_status
-    features["status_diff"] = abs(rd_status - sd_status)
+    rd_status_family = rd_status // 100
+    sd_status_family = sd_status // 100
+    # are they in the same class ?
+    features["status_match"] = int(rd_status_family == sd_status_family)
 
     rd_html_len = len(rd_content.get("html", "")) if isinstance(rd_content.get("html"), str) else 0
     sd_html_len = len(sd_content.get("html", "")) if isinstance(sd_content.get("html"), str) else 0
-    features["rd_html_len"] = rd_html_len
-    features["sd_html_len"] = sd_html_len
     features["html_len_diff"] = abs(rd_html_len - sd_html_len)
 
     features["rd_has_screenshot"] = int(bool(rd_content.get("screenshot")))
     features["sd_has_screenshot"] = int(bool(sd_content.get("screenshot")))
 
-    # Ratio (avoid division by zero)
+    # html ratio between sd and rd
     features["html_len_ratio"] = sd_html_len / rd_html_len if rd_html_len > 0 else 0
 
-    # -------------------------------
-    # Network/server headers
-    # -------------------------------
+    # server headers
     def extract_server_from_har(content: Dict[str, Any]) -> str:
         if not isinstance(content, dict):
             return ""
@@ -166,23 +121,17 @@ def extract_additional_features(additional: Dict[str, Any]) -> Dict[str, Any]:
     sd_server = extract_server_from_har(sd_content)
 
     features["same_server_type"] = int(rd_server == sd_server)
-    features["rd_server_envoy"] = int("envoy" in rd_server)
-    features["sd_server_envoy"] = int("envoy" in sd_server)
 
-    # -------------------------------
     # Derived global indicators
-    # -------------------------------
     features["same_asn_and_server"] = int(features["asn_overlap"] and features["same_server_type"])
-    features["is_likely_legit"] = int(
-        rd_wayback_count > 0 and features["same_server_type"] and features["asn_overlap"]
+    features["is_constistant_history"] = int(
+        rd_wayback_count > 0 and features["status_match"] and features["asn_overlap"]
     )
 
     return features
 
 
-# -------------------------------
 # Quick test
-# -------------------------------
 if __name__ == "__main__":
     import json
 
